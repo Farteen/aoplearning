@@ -1,0 +1,277 @@
+{
+    "root": {
+        "data": {
+            "id": "bzv4kbnsgd40",
+            "created": 1578965523429,
+            "text": "Spring AOP 实现原理与CGLIB应用"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "bzv4kj9ateo0",
+                    "created": 1578965539968,
+                    "text": "Overview"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "bzv4klk07bc0",
+                            "created": 1578965544968,
+                            "text": "面向对象变成补充"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "bzv4ksru3r40",
+                            "created": 1578965560679,
+                            "text": "广泛应用于具有横切性质的系统级服务"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "bzv4l19h1wo0",
+                                    "created": 1578965579160,
+                                    "text": "事务管理"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4l3hsfoo0",
+                                    "created": 1578965584016,
+                                    "text": "安全检查"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4l4top9s0",
+                                    "created": 1578965586913,
+                                    "text": "缓存"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4l5wu8v40",
+                                    "created": 1578965589280,
+                                    "text": "对象池管理"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "bzv4kzsxpxc0",
+                            "created": 1578965575983,
+                            "text": "实现"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "bzv4lb2zdyo0",
+                                    "created": 1578965600535,
+                                    "text": "AOP框架自动创建AOP代理"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4ligildc0",
+                                    "created": 1578965616591,
+                                    "text": "分类"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "bzv4lkqsqug0",
+                                            "created": 1578965621566,
+                                            "text": "静态代理"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "bzv4lsl9rh40",
+                                                    "created": 1578965638647,
+                                                    "text": "编译阶段生成AOP代理类"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "bzv4m1jjvn40",
+                                                    "created": 1578965658134,
+                                                    "text": "也称编译时增强"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "bzv4lmmdwio0",
+                                            "created": 1578965625653,
+                                            "text": "动态代理"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "bzv4m5rucmo0",
+                                                    "created": 1578965667342,
+                                                    "text": "运行时借助于JDK动态代理、CGLIB等在内存临时生成AOP的动态代理类类"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "bzv4mk6funs0",
+                                                    "created": 1578965698700,
+                                                    "text": "运行时增强"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "bzv4mnnmauo0",
+                    "created": 1578965706269,
+                    "text": "1.AOP存在的价值"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "bzv4mqtsdfs0",
+                            "created": 1578965713172,
+                            "text": "软件规模增大，应用逐渐升级，出现一些OOP很难解决的问题"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "bzv4n5d1n8g0",
+                            "created": 1578965744812,
+                            "text": "通过分析、抽象出一些列具有一定属性和行为的对象，\n并通过这些对象之间的写作来形成一个完整的软件功能"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "bzv4npvyiog0",
+                            "created": 1578965789491,
+                            "text": "由于对象可以继承，因此我们可以把具有相同功能或相\n同特性的属性抽象到一个层次分明的类结构体系中。"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "bzv4opatxhc0",
+                    "created": 1578965866577,
+                    "text": "2.使用AspectJ的编译时增强进行AOP"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "bzv4own5b7s0",
+                            "created": 1578965882560,
+                            "text": "AspectJ介绍"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "bzv4p4ejptk0",
+                                    "created": 1578965899455,
+                                    "text": "AspectJ是基于Java语言的AOP框架，提供了强大的AOP功能，其他很多AOP框架都借鉴或采纳其中的一些思想。"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4pm385eo0",
+                                    "created": 1578965937951,
+                                    "text": "组成"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "bzv4po9og5c0",
+                                            "created": 1578965942695,
+                                            "text": "定义了如何表达、定义AOP编程中的语法规范，通过这套语言规范，\n我们可以方便的用AOP来解决Java语言中存在交叉关注点问题"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "bzv4qcjeleg0",
+                                            "created": 1578965995526,
+                                            "text": "工具部分，包括编译器、调试工具"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4ur0vu7k0",
+                                    "created": 1578966340515,
+                                    "text": "编译时增强"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "bzv4ux280a00",
+                                            "created": 1578966353656,
+                                            "text": "public aspect TxAspect { \n\t// 指定执行 Hello.sayHello() 方法时执行下面代码块\n\tvoid around():call(void Hello.sayHello()){\n\t    System.out.println(\"开始事务 ...\");\n\t    proceed();\n\t    System.out.println(\"事务结束 ...\");\n\t}\n}",
+                                            "layout_left_offset": {
+                                                "x": -15,
+                                                "y": -8
+                                            }
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "bzv4v3fn5lc0",
+                                            "created": 1578966367528,
+                                            "text": "acj -d . Hello.java TxAspect.java",
+                                            "layout_left_offset": {
+                                                "x": -39,
+                                                "y": 2
+                                            }
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "bzv4vy5e3xk0",
+                                            "created": 1578966434389,
+                                            "text": "public aspect LogAspect \n{ \n// 定义一个 PointCut，其名为 logPointcut \n// 该 PointCut 对应于指定 Hello 对象的 sayHello 方法\n\tpointcut logPointcut() \n:execution(void Hello.sayHello()); \n// 在 logPointcut 之后执行下面代码块\n\tafter():logPointcut() \n\t{ \nSystem.out.println(\"记录日志 ...\"); \n\t} \n}",
+                                            "layout_left_offset": {
+                                                "x": -7,
+                                                "y": 4
+                                            }
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
