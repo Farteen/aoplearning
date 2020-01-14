@@ -3,7 +3,8 @@
         "data": {
             "id": "bzv4kbnsgd40",
             "created": 1578965523429,
-            "text": "Spring AOP 实现原理与CGLIB应用"
+            "text": "Spring AOP 实现原理与CGLIB应用",
+            "note": "https://www.ibm.com/developerworks/cn/java/j-lo-springaopcglib/index.html"
         },
         "children": [
             {
@@ -177,7 +178,8 @@
                 "data": {
                     "id": "bzv4opatxhc0",
                     "created": 1578965866577,
-                    "text": "2.使用AspectJ的编译时增强进行AOP"
+                    "text": "2.使用AspectJ的编译时增强进行AOP",
+                    "expandState": "expand"
                 },
                 "children": [
                     {
@@ -219,51 +221,200 @@
                                         "children": []
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "bzv4ur0vu7k0",
+                            "created": 1578966340515,
+                            "text": "编译时增强"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "bzv4ux280a00",
+                                    "created": 1578966353656,
+                                    "text": "public aspect TxAspect { \n\t// 指定执行 Hello.sayHello() 方法时执行下面代码块\n\tvoid around():call(void Hello.sayHello()){\n\t    System.out.println(\"开始事务 ...\");\n\t    proceed();\n\t    System.out.println(\"事务结束 ...\");\n\t}\n}",
+                                    "layout_left_offset": {
+                                        "x": -15,
+                                        "y": -8
+                                    }
+                                },
+                                "children": []
                             },
                             {
                                 "data": {
-                                    "id": "bzv4ur0vu7k0",
-                                    "created": 1578966340515,
-                                    "text": "编译时增强"
+                                    "id": "bzv4v3fn5lc0",
+                                    "created": 1578966367528,
+                                    "text": "acj -d . Hello.java TxAspect.java",
+                                    "layout_left_offset": {
+                                        "x": -39,
+                                        "y": 2
+                                    }
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv4vy5e3xk0",
+                                    "created": 1578966434389,
+                                    "text": "public aspect LogAspect \n{ \n// 定义一个 PointCut，其名为 logPointcut \n// 该 PointCut 对应于指定 Hello 对象的 sayHello 方法\n\tpointcut logPointcut() \n:execution(void Hello.sayHello()); \n// 在 logPointcut 之后执行下面代码块\n\tafter():logPointcut() \n\t{ \nSystem.out.println(\"记录日志 ...\"); \n\t} \n}",
+                                    "layout_left_offset": {
+                                        "x": -7,
+                                        "y": 4
+                                    }
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv62xiqwqg0",
+                                    "created": 1578969802679,
+                                    "text": "你大妈已经不是你大妈 Hello.java被AOP之后就变了"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv642u74ww0",
+                                    "created": 1578969892619,
+                                    "text": "性能优势"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "bzv64k91u0o0",
+                    "created": 1578969930522,
+                    "text": "3.Spring AOP"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "bzv64mu6dhc0",
+                            "created": 1578969936153,
+                            "text": "Overview"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "bzv64ogsxdc0",
+                                    "created": 1578969939698,
+                                    "text": "于Aspectj相同的是，Spring AOP同样需要对目标类进行增强，也就是生成新的AOP代理类"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv672iz7w80",
+                                    "created": 1578970127033,
+                                    "text": "不同，Spring AOP无需使用任何特殊命令对Java源码进行编译，它采用运行时动态的在内存中生成代理类方式生成AOP代理。"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv67ooe5x40",
+                                    "created": 1578970175250,
+                                    "text": "支持AspectJ类型 "
                                 },
                                 "children": [
                                     {
                                         "data": {
-                                            "id": "bzv4ux280a00",
-                                            "created": 1578966353656,
-                                            "text": "public aspect TxAspect { \n\t// 指定执行 Hello.sayHello() 方法时执行下面代码块\n\tvoid around():call(void Hello.sayHello()){\n\t    System.out.println(\"开始事务 ...\");\n\t    proceed();\n\t    System.out.println(\"事务结束 ...\");\n\t}\n}",
-                                            "layout_left_offset": {
-                                                "x": -15,
-                                                "y": -8
-                                            }
+                                            "id": "bzv680ga3mg0",
+                                            "created": 1578970200881,
+                                            "text": "Aspect"
                                         },
                                         "children": []
                                     },
                                     {
                                         "data": {
-                                            "id": "bzv4v3fn5lc0",
-                                            "created": 1578966367528,
-                                            "text": "acj -d . Hello.java TxAspect.java",
-                                            "layout_left_offset": {
-                                                "x": -39,
-                                                "y": 2
-                                            }
+                                            "id": "bzv67ysc1200",
+                                            "created": 1578970197256,
+                                            "text": "Pointcut"
                                         },
                                         "children": []
                                     },
                                     {
                                         "data": {
-                                            "id": "bzv4vy5e3xk0",
-                                            "created": 1578966434389,
-                                            "text": "public aspect LogAspect \n{ \n// 定义一个 PointCut，其名为 logPointcut \n// 该 PointCut 对应于指定 Hello 对象的 sayHello 方法\n\tpointcut logPointcut() \n:execution(void Hello.sayHello()); \n// 在 logPointcut 之后执行下面代码块\n\tafter():logPointcut() \n\t{ \nSystem.out.println(\"记录日志 ...\"); \n\t} \n}",
-                                            "layout_left_offset": {
-                                                "x": -7,
-                                                "y": 4
-                                            }
+                                            "id": "bzv688hqx800",
+                                            "created": 1578970218384,
+                                            "text": "Advice"
                                         },
                                         "children": []
                                     }
                                 ]
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv68jkhdvk0",
+                                    "created": 1578970242494,
+                                    "text": "使用了和AspectJ5一样的注解，单并没有使用AspectJ的编译器或者织入器，底层依然使用的是Spring AOP，依然是在运行时动态生成AOP代理，并不依赖于AspectJ的编译器或织入器。"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "bzv6ctfe1600",
+                            "created": 1578970577410,
+                            "text": "配置文件"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "bzv6cvc0lww0",
+                                    "created": 1578970581560,
+                                    "text": "<aop:aspectj-autoproxy />"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv6d0vf6fc0",
+                                    "created": 1578970593617,
+                                    "text": "@AspectJ"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv6d4rsik80",
+                                    "created": 1578970602105,
+                                    "text": "<bean class=\"org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator />"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "bzv6dnlbreg0",
+                                            "created": 1578970643072,
+                                            "text": "BeanPostProcessor，该bean后置处理器会为容器中Bean生成AOP代理"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv6ehq6qm00",
+                                    "created": 1578970708670,
+                                    "text": "当启动了@AspectJ支持后，只要我们再Spring容器中带@AspectJ注释的bean，Spring将会自动识别改Bean，并将Bean作为Aspect Bean处理。"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "bzv6fsb7vwg0",
+                                    "created": 1578970810074,
+                                    "text": "在Spring容器中配置Aspect Bean与普通配置Bean没有任何区别，一样使用<bean .../>进行配置，一样支持使用以来注入来配置属性值。"
+                                },
+                                "children": []
                             }
                         ]
                     }
